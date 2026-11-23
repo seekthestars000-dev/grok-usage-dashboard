@@ -2,7 +2,7 @@
 
 Local dashboard for weekly Grok Bot token usage, daily spikes, high-frequency loops, and per-bot / per-routine breakdowns.
 
-Dark theme, sample data until a usage API is connected. Nothing here deploys, and the repo should not contain secrets.
+Dark theme, sample data until a usage API is connected. The repo should not contain secrets.
 
 ## Run
 
@@ -43,3 +43,18 @@ export async function getUsage(): Promise<UsageSnapshot> {
 Derived numbers (percent of limit, projected finish, spike days, Loop / Watch tags, saving tips) are computed in `src/lib/metrics.ts` from the raw snapshot, so the API does not need to pre-aggregate them.
 
 Spike days are daily totals above mean + 1.25 standard deviations. A routine is a Loop when it fires faster than once a minute (or has 1,000+ calls), and a Watch when it fires every few minutes with 150+ calls.
+
+
+## Deploy
+
+This repo is configured for GitHub Pages at:
+
+https://seekthestars000-dev.github.io/grok-usage-dashboard/
+
+GitHub Pages has to be turned on once. The Actions token cannot enable it (`Resource not accessible by integration`).
+
+1. Open [Pages settings](https://github.com/seekthestars000-dev/grok-usage-dashboard/settings/pages).
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+3. Open the Actions tab and re-run **Deploy to GitHub Pages**, or push a commit to `main`.
+
+After that, every push to `main` rebuilds the app with base path `/grok-usage-dashboard/` and publishes it.
